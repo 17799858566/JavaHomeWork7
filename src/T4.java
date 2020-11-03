@@ -2,15 +2,31 @@ public class T4 {
     public static void main(String[] args) {
         StopWatch m = new StopWatch();
         m.start();
-        for (int i = 0; i < 9999999; i++) {
-            for (int j = 0; j < 9999999; j++) {
+        int[] arr = new int[100000];
+        for(int i = 0;i<100000;i++){
+            arr[i]=i;
+        }
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
             }
+            if (i != minIndex) {
+                int temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i] + " ");
         }
         m.stop();
         System.out.println(m.getElapsedTime());
     }
 }
-    class StopWatch {
+class StopWatch {
         private long startTime;
         private long endTime;
 
@@ -38,4 +54,5 @@ public class T4 {
         public long getElapsedTime() {
             return this.endTime - this.startTime;
         }
-    }
+}
+
